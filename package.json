@@ -1,0 +1,29 @@
+{
+  "name": "experimenter-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "node dist/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "tsc && node test.js",
+    "start": "tsc && node ."
+  },
+  "keywords": [
+    "discord",
+    "js",
+    "ts",
+    "javascript",
+    "typescript",
+    "bot",
+    "experiment",
+    "upgrade",
+    "experience",
+    "experimenter"
+  ],
+  "author": "tolgchu",
+  "license": "CC-BY-NC-ND-4.0",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.1"
+  }
+}
