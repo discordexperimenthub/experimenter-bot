@@ -1,4 +1,4 @@
-import { APIApplicationCommand, Client, CommandInteraction, Events, GatewayIntentBits } from "discord.js";
+import { APIApplicationCommand, Client, CommandInteraction, Events, GatewayIntentBits, MessageComponentInteraction } from "discord.js";
 import { error, info, log } from "./modules/Logger.js";
 import { CommandMap } from "./util/types.js";
 import { readdirSync } from "fs";
@@ -59,7 +59,7 @@ client.on(Events.ClientReady, async () => {
     };
 });
 
-async function respondCommandInteraction(interaction: CommandInteraction, message: string) {
+async function respondInteraction(interaction: CommandInteraction | MessageComponentInteraction, message: string) {
     await interaction.reply({
         content: message,
         ephemeral: true
@@ -70,14 +70,22 @@ client.on(Events.InteractionCreate, async interaction => {
     if (interaction.isCommand()) {
         const command = commands.get(interaction.commandName);
 
-        if (!command) return respondCommandInteraction(interaction, 'This command does not exist.');
+        if (!command) return respondInteraction(interaction, 'This command does not exist.');
 
         try {
             await command.execute(interaction as never, database, commandMap);
         } catch (err) {
-            await respondCommandInteraction(interaction, 'There was an error while executing this command.');
+            await respondInteraction(interaction, 'There was an error while executing this command.');
 
             error(err);
+        };
+    } else if (interaction.isMessageComponent()) {
+        let component = interaction.customId;
+
+        switch (component) {
+            default: {
+                return respondInteraction(interaction, 'This component does not exist.');
+            };
         };
     };
 });
