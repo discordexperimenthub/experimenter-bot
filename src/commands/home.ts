@@ -24,14 +24,18 @@ export default new Command()
 
         switch (subcommand) {
             case 'setup': {
-                if (home.data.set) interaction.editReply({
-                    embeds: [
-                        new FeatureAlreadySetUp()
-                            .setFeature('Home')
-                            .addSuggestedCommand(commands['home setup'])
-                            .toEmbed()
-                    ]
-                });
+                if (home.data.set) {
+                    interaction.editReply({
+                        embeds: [
+                            new FeatureAlreadySetUp()
+                                .setFeature('Home')
+                                .addSuggestedCommand(commands['home setup'])
+                                .toEmbed()
+                        ]
+                    });
+
+                    return;
+                };
             };
         };
     });
