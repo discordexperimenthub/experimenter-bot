@@ -1,5 +1,5 @@
 import { EmbedBuilder } from "discord.js";
-import { CommandMapCommand } from "../util/types.js";
+import { CommandMapCommand } from "./types.js";
 
 export class FeatureAlreadySetUp {
     feature: string;
