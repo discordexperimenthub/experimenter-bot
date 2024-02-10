@@ -1,8 +1,8 @@
 {
   "name": "experimenter-bot",
   "version": "1.0.0",
-  "description": "",
-  "main": "node dist/index.js",
+  "description": "Let's upgrade your Discord experience!",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
     "test": "tsc && node test.js",
@@ -23,7 +23,10 @@
   "author": "tolgchu",
   "license": "CC-BY-NC-ND-4.0",
   "dependencies": {
+    "@types/node": "^20.11.16",
+    "@types/typescript": "^2.0.0",
     "discord.js": "^14.14.1",
-    "dotenv": "^16.4.1"
+    "dotenv": "^16.4.1",
+    "fetchu.js": "^1.0.1"
   }
 }
