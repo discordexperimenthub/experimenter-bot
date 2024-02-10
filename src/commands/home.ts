@@ -1,4 +1,4 @@
-import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 import Home from "../modules/features/Home.js";
 import { FeatureAlreadySetUp } from "../util/embedPresets.js";
 import Command from "../modules/Command.js";
@@ -36,6 +36,23 @@ export default new Command()
 
                     return;
                 };
+
+                interaction.editReply({
+                    embeds: [
+                        new EmbedBuilder()
+                            .setTitle('Home')
+                            .setDescription("Let's highlight the best moments of your server! Home feature will allow you to set up a channel where the best moments of your server will be highlighted.\n\n*imagine a screenshot of home here*")
+                    ],
+                    components: [
+                        new ActionRowBuilder<ButtonBuilder>()
+                            .setComponents(
+                                new ButtonBuilder()
+                                    .setCustomId('setup_home')
+                                    .setStyle(ButtonStyle.Success)
+                                    .setLabel("Let's start!")
+                            )
+                    ]
+                });
             };
         };
     });
