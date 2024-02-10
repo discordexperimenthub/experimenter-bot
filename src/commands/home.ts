@@ -1,6 +1,6 @@
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 import Home from "../modules/features/Home.js";
-import { FeatureAlreadySetUp } from "../modules/EmbedPresets.js";
+import { FeatureAlreadySetUp } from "../util/embedPresets.js";
 import Command from "../modules/Command.js";
 
 export default new Command()
