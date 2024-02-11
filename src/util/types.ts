@@ -15,6 +15,7 @@ export type CommandExecute = SlashCommandExecute | UserCommandExecute | MessageC
 
 export interface HomeData {
     set: boolean;
+    enabled: boolean;
     channelId: Snowflake;
 };
 
@@ -27,3 +28,5 @@ export interface CommandMapCommand {
 export interface CommandMap {
     [name: string]: CommandMapCommand;
 };
+
+export type SlashCommandMention = `</${string}:${Snowflake}>`;
