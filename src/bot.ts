@@ -8,7 +8,7 @@ import Database from "./modules/Database.js";
 import Command from "./modules/Command.js";
 import Home from "./modules/features/Home.js";
 import { mentionCommand } from "./util/functions.js";
-import { FeatureSetUpSave, FeatureSetUpSuccess } from "./util/embedPresets.js";
+import { FeatureResetSuccess, FeatureSetUpSave, FeatureSetUpSuccess } from "./util/embedPresets.js";
 
 const client = new Client({
     intents: [
@@ -95,12 +95,12 @@ client.on(Events.InteractionCreate, async interaction => {
                             .setTitle('Home')
                             .setFields(
                                 {
-                                    name: 'Home Channel',
+                                    name: 'Channel',
                                     value: 'Please select a channel where the best moments of your server will be highlighted.'
                                 },
                                 {
                                     name: 'Protip',
-                                    value: `You can change this later by using the ${'**/home channel (not added yet)**' /*mentionCommand(commandMap, 'home channel')*/} command.`
+                                    value: `You can change this later by using the ${mentionCommand(commandMap, 'home channel')} command.`
                                 }
                             )
                     ],
@@ -152,8 +152,9 @@ client.on(Events.InteractionCreate, async interaction => {
 
                 if (!channel) return;
 
-                home.setChannel(channel.id);
+                await channel.setPosition(0);
 
+                home.setChannel(channel.id);
                 interaction.update({
                     embeds: [
                         new FeatureSetUpSave()
@@ -187,7 +188,6 @@ client.on(Events.InteractionCreate, async interaction => {
                 if (!original.permissionsFor(client.user.id).has('SendMessages')) return respondInteraction(interaction, 'I need the **Send Messages** permission to use this channel.');
 
                 home.setChannel(channel.id);
-
                 interaction.update({
                     embeds: [
                         new FeatureSetUpSave()
@@ -208,6 +208,21 @@ client.on(Events.InteractionCreate, async interaction => {
                                     .setLabel('Save Changes')
                             )
                     ]
+                });
+
+                break;
+            };
+            case 'reset_home': {
+                home.setSet(false);
+                home.setEnabled(false);
+                home.setChannel(null);
+                interaction.update({
+                    embeds: [
+                        new FeatureResetSuccess()
+                            .setFeature('Home')
+                            .toEmbed()
+                    ],
+                    components: []
                 });
 
                 break;
